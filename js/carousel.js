@@ -36,7 +36,7 @@
     wrap: true
   }
 
-  Carousel.prototype.cycle =  function (e) {
+  Carousel.prototype.cycle = function (e) {
     if (!e) {
       this.paused = false
     }
@@ -68,7 +68,9 @@
     }
 
     if (this.sliding) {
-      return this.$element.one('slid.bs.carousel', function () { that.to(pos) }) // yes, "slid". not a typo. past tense of "to slide".
+      return this.$element.one('slid.bs.carousel', function () {
+        that.to(pos)
+      }) // yes, "slid". not a typo. past tense of "to slide".
     }
     if (activeIndex === pos) {
       return this.pause().cycle()
@@ -125,7 +127,10 @@
       return (this.sliding = false)
     }
 
-    var e = $.Event('slide.bs.carousel', { relatedTarget: $next[0], direction: direction })
+    var e = $.Event('slide.bs.carousel', {
+      relatedTarget: $next[0],
+      direction: direction
+    })
     this.$element.trigger(e)
     if (e.isDefaultPrevented()) {
       return
@@ -157,7 +162,9 @@
           $next.removeClass([type, direction].join(' ')).addClass('active')
           $active.removeClass(['active', direction].join(' '))
           that.sliding = false
-          setTimeout(function () { that.$element.trigger('slid.bs.carousel') }, 0) // yes, "slid". not a typo. past tense of "to slide".
+          setTimeout(function () {
+            that.$element.trigger('slid.bs.carousel')
+          }, 0) // yes, "slid". not a typo. past tense of "to slide".
         })
         .emulateTransitionEnd($active.css('transition-duration').slice(0, -1) * 1000)
     } else {
